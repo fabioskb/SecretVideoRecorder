@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/videoGallery"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/Base.Theme.CameraApp"
+    android:background="?android:attr/windowBackground"
+    tools:context=".view.GalleryFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery_title"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/buttonsOff"
+        android:layout_gravity="center|top"
+        android:textSize="23sp" />
+
+    <Button
+
+        android:id="@+id/btn_delete_all_videos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="8dp"
+        android:text="@string/delete_all_videos" />
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/recyclerVideos"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="100dp"
+        android:theme="@style/Base.Theme.CameraApp"
+        app:spanCount="2">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>

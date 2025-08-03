@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="my_videos"
+        path="Movies/.BVR/" />
+    <files-path
+        name="internal_recordings"
+        path="BVR/" />
+    <files-path
+        name="internal_root_files"
+        path="." />
+    <external-files-path
+        name="external_recordings"
+        path="Movies/"/>
+    <root-path
+        name="any_storage_root"
+        path="storage/" />
+    <root-path
+        name="app_specific_movies_on_any_volume"
+        path="Android/data/com.fabiosf34.backgroundvideorecorder/files/movies/" />
+</paths>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="buttonsOff">#006B78</color>
+    <color name="buttonsOn">#00BCD4</color>
+    <!-- Outras cores -->
+    <color name="switch_thumb_color_on">#4CAF50</color> <!-- Verde para ligado -->
+    <color name="switch_thumb_color_off">#BDBDBD</color> <!-- Cinza para desligado -->
+    <color name="switch_track_color_on">#A5D6A7</color> <!-- Verde claro para trilha ligada -->
+    <color name="switch_track_color_off">#E0E0E0</color>
+    <color name="background_gallery">#ffffff</color>
+    <color name="background_gallery_dark">#121212</color>
+    <color name="radio_group_background_color">#D0AFAFAF</color>
+</resources>

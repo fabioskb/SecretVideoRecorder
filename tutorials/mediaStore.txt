@@ -1,0 +1,22 @@
+                //////////////////////////////////////////
+                    val contentValues = ContentValues().apply {
+                        put(MediaStore.MediaColumns.DISPLAY_NAME, "Video-$timeStamp")
+                        put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4")
+                        put(
+                            MediaStore.Video.Media.RELATIVE_PATH,
+                            Environment.DIRECTORY_MOVIES + "/" + Utils.Companion.CAM_DIR_NAME_API_Q_OR_GREATER
+                        )
+                        put(MediaStore.MediaColumns.DATE_ADDED, System.currentTimeMillis() / 1000)
+                        put(
+                            MediaStore.MediaColumns.DATE_MODIFIED,
+                            System.currentTimeMillis() / 1000
+                        )
+                        put(MediaStore.Video.Media.IS_PENDING, 1)
+                    }
+                    mediaStoreOutputOptions =
+                        MediaStoreOutputOptions.Builder(
+                            contentResolver,
+                            MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                        ).setContentValues(contentValues).build()
+                ////////////////////////////////////////////////
+//                }

@@ -1,0 +1,39 @@
+
+ı
+;
+android*http://schemas.android.com/apk/res/android'
+4
+app'http://schemas.android.com/apk/res-auto'3androidx.coordinatorlayout.widget.CoordinatorLayout"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"‰
+*http://schemas.android.com/apk/res/androidtheme@style/Theme.AppCompat.DayNight"(€€„2*
+(”„Èøstyle/Theme.AppCompat.DayNight0*¸
+¯!androidx.appcompat.widget.Toolbar"6
+'http://schemas.android.com/apk/res-autotitle(™‰ø"P
+*http://schemas.android.com/apk/res/androidlayout_margin8dp"(ö„2:h"`
+*http://schemas.android.com/apk/res/androidlayout_widthwrap_content"(ô„2:0şÿÿÿÿÿÿÿÿ"}
+*http://schemas.android.com/apk/res/androidlayout_height?attr/actionBarSize"(õ„2"
+ …€øattr/actionBarSize0À€"|
+'http://schemas.android.com/apk/res-autonavigationIcon@drawable/ic_settings"(Ø†ø2 
+£ ødrawable/ic_settings0"—
+*http://schemas.android.com/apk/res/androidtheme&@style/ThemeOverlay.AppCompat.DayNight"(€€„21
+/€…Èø%style/ThemeOverlay.AppCompat.DayNight0"_
+*http://schemas.android.com/apk/res/androidid@+id/toolbar"(Ğ„2
+ƒ„¤ø
+id/toolbar0"S
+*http://schemas.android.com/apk/res/androidlayout_gravityend"(³„2:8…€€"Q
+*http://schemas.android.com/apk/res/androidlayoutDirectionrtl"(²‡„2:0*Æ
+½!androidx.appcompat.widget.Toolbar"6
+'http://schemas.android.com/apk/res-autotitle(™‰ø"P
+*http://schemas.android.com/apk/res/androidlayout_margin8dp"(ö„2:h"`
+*http://schemas.android.com/apk/res/androidlayout_widthwrap_content"(ô„2:0şÿÿÿÿÿÿÿÿ"}
+*http://schemas.android.com/apk/res/androidlayout_height?attr/actionBarSize"(õ„2"
+ …€øattr/actionBarSize0À€"z
+'http://schemas.android.com/apk/res-autonavigationIcon@drawable/ic_gallery"(Ø†ø2
+“ ødrawable/ic_gallery0"—
+*http://schemas.android.com/apk/res/androidtheme&@style/ThemeOverlay.AppCompat.DayNight"(€€„21
+/€…Èø%style/ThemeOverlay.AppCompat.DayNight0"m
+*http://schemas.android.com/apk/res/androidid@+id/galleryToolbar"(Ğ„2
+å¤øid/galleryToolbar0"U
+*http://schemas.android.com/apk/res/androidlayout_gravitystart"(³„2:8ƒ€€"Q
+*http://schemas.android.com/apk/res/androidlayoutDirectionrtl"(²‡„2:0'

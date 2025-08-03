@@ -1,0 +1,11 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.CameraApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <item name="colorPrimary">@color/buttonsOff</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/buttonsOn</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="radioButtonStyle">@style/Widget.AppCompat.CompoundButton.RadioButton</item>
+    </style>
+</resources>

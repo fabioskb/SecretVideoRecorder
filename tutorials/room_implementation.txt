@@ -1,0 +1,33 @@
+Em build.gradle.kts com base em project, em plugins adicione:
+id("com.google.devtools.ksp") version "2.0.21-1.0.27" apply false <- Substitua a versão do KSP pela
+                                                                    mais recente.
+
+Em build.gradle com base em module, adicione:
+plugins {
+    ...
+    id("com.google.devtools.ksp")
+}
+
+...
+dependencies {
+
+   ...
+// Room
+    val roomVersion = "2.7.1"
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+    // opcional - Suporte a extensões Kotlin e Coroutines para Room
+    implementation("androidx.room:room-ktx:$roomVersion")
+    // opcional - Suporte a RxJava2 para Room
+    implementation("androidx.room:room-rxjava2:$roomVersion")
+    // opcional - Suporte a RxJava3 para Room
+    implementation("androidx.room:room-rxjava3:$roomVersion")
+    // opcional - Suporte a Guava para Room, incluindo Optional e ListenableFuture
+    implementation("androidx.room:room-guava:$roomVersion")
+    // opcional - Integração com Paging 3
+    implementation("androidx.room:room-paging:$roomVersion")
+}
+
+Agora sincronize o projeto.

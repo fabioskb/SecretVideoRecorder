@@ -1,0 +1,27 @@
+
+(OK) 1 - Fazer a FormPasswordFragment ou Activity, para ser usada ao usuário clicar no botão set password
+    em settings. O usuário poderá editar uma senha atual ou formar uma pela primeira vez.
+
+(OK) 2 - Configura a biometria, com todas as permissões e possibilidades, e então, coloca-la em pratica. O
+    usuário poderá entrar na aplicação apenas com a biometria, sem precisar inserir a senha.
+    Lembrando que para o usuário usar a biometria terá que ter a senha da aplicação configurada e em
+    uso.
+
+(OK) 3 - Reiniciar a app no primeiro boot, após as permissões serem concedidas pelo usuário, para que
+    funcione de maneira correta.
+
+(OK) 4 - Internacionalização do app (Português Brasil).
+
+(OK) 5 - Salvar os videos no armazenamento externo do próprio app.
+    Salva no cartão de memoria se disponivel, se não, salva no armazenamento interno.
+
+(OK) 6 - Criar a função em Recording listener para erro na gravação.
+
+(OK) 7 - Tirar notificações sem foreground services do serviço de gravação e colocar na CamActivity.
+
+(OK) 8 - Corrigir o bug quando clica no preview com front cam ativado, volta para back cam.
+
+(OK) Adicionar um dialogo para usuario confirmar a exclusão de todos videos na galeria.
+
+27/06/2025 - Salvar os vídeos no armazenamento visivel para galeria do dispositivo e adicionar a opção para ocultar
+             os vídeos que forem gravados após ativar a esta opção.

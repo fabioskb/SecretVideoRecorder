@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.SettingsActivity">
+
+    <EditText
+        android:id="@+id/password_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        android:letterSpacing="0.5"
+        android:textSize="23sp"
+        android:layout_marginTop="256dp"
+        android:autofillHints="password"
+        />
+
+    <Button
+        android:id="@+id/btn_enter"
+        android:backgroundTint="@color/buttonsOff"
+        android:text="@string/btn_enter"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAllCaps="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="23dp"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/biometric_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/use_biometric_switch"
+        android:layout_gravity="center"
+        app:switchPadding="32dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:thumbTint="@color/switch_thumb_color_off"
+        app:trackTint="@color/switch_track_color_off"
+        android:layout_marginTop="23dp"/>
+</LinearLayout>

@@ -1,0 +1,4 @@
+
+
+  // No layout set isso para que o background seja igual o da janela atual do app
+  android:background="?android:attr/windowBackground"

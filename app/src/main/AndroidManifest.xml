@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+
+<!--  TODO: Internet permission to admob  -->
+<!--    <uses-permission android:name="android.permission.INTERNET" />-->
+    <!-- TODO: Opcional, mas recomendado para AdMob para verificar o estado da rede -->
+<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+<!--    <uses-permission-->
+<!--        android:name="android.permission.WRITE_EXTERNAL_STORAGE"-->
+<!--        android:maxSdkVersion="28" />-->
+<!--    <uses-permission-->
+<!--        android:name="android.permission.READ_MEDIA_VIDEO"-->
+<!--        tools:ignore="SelectedPhotoAccess"/>-->
+<!--    <uses-permission-->
+<!--        android:name="android.permission.READ_MEDIA_IMAGES"-->
+<!--        tools:ignore="SelectedPhotoAccess" />-->
+<!--    <uses-permission-->
+<!--        android:name="android.permission.READ_EXTERNAL_STORAGE"-->
+<!--        android:maxSdkVersion="32" />-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission
+        android:name="android.permission.MEDIA_CONTENT_CONTROL"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.MEDIA_ROUTING_CONTROL" />
+<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />-->
+
+    <queries>
+        <!--    permite que seu aplicativo descubra outros apps que podem lidar com
+        ação de VIEW para dados do tipon video/*    -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="video/*" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CameraApp"
+        tools:targetApi="31">
+
+<!--        TODO: Admob -->
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+<!--            android:value="${admobAppId}" />-->
+<!--        test application id: ca-app-pub-3940256099942544~3347511713-->
+
+
+        <!--         Default alias-->
+        <activity-alias
+            android:name=".PermissionsCheckActivityAlias"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:label="@string/app_name"
+            android:targetActivity=".view.PermissionsCheckActivity"
+            android:theme="@style/Theme.CameraApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Alias discreet -->
+        <activity-alias
+            android:name=".PermissionsCheckActivityAliasDiscreet"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_discreet"
+            android:roundIcon="@mipmap/ic_launcher_discreet_round"
+            android:label="@string/app_name_discreet"
+            android:targetActivity=".view.PermissionsCheckActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".view.PermissionsCheckActivity"
+            android:exported="false">
+<!--                            <intent-filter>-->
+<!--                                <action android:name="android.intent.action.MAIN" />-->
+<!--                                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".view.LoginActivity"
+            android:configChanges="screenSize|screenLayout|orientation"
+            android:exported="false" />
+        <activity
+            android:name=".view.SettingsActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service
+            android:name=".model.services.BackgroundVideoService"
+            android:exported="false"
+            android:foregroundServiceType="microphone|camera" /> <!-- <receiver -->
+        <!-- android:name=".model.services.VolumeReceiver" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MEDIA_BUTTON" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> &lt;!&ndash; <receiver android:name=".VolumeButtonReceiver" &ndash;&gt; -->
+        <!-- android:exported="true" -->
+        <!-- android:enabled="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MEDIA_BUTTON" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <activity
+            android:hardwareAccelerated="true"
+            android:name=".view.CamActivity"
+            android:theme="@style/Theme.Material3.DayNight.NoActionBar"
+            android:configChanges="screenSize|screenLayout|orientation"
+            android:exported="false" />
+    </application>
+
+</manifest>
