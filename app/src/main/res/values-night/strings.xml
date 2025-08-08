@@ -99,5 +99,31 @@
     <string name="start_recording_on_boot_off">Start recording when launch disabled.</string>
     <string name="open">Open</string>
     <string name="stop_capture">Stop</string>
+    <string name="user_responsibility_disclaimer_title">Attention: User Responsibility</string>
+    <string name="user_responsibility_disclaimer_message">READ CAREFULLY. BY USING THE VIDEO RECORDING FUNCTIONALITY OF THIS APPLICATION, YOU FULLY AGREE TO THE FOLLOWING TERMS:
+
+\n\nThe SVR - Secret Video application (hereinafter "the Application") allows video recording, including when the Application is operating in the background or when the device screen is off.
+
+\n\n   1.Your Exclusive Responsibility: You, as the user, are solely and exclusively responsible for any and all use of the Application\'s video recording functionality, especially when recording in the background. This includes, without limitation, deciding when, where, how, and what to record.
+
+\n\n   2.Mandatory Legal Compliance: You undertake to use the video recording functionality in strict compliance with all applicable local, state, national, and international laws, regulations, and statutes. This fundamentally includes all laws relating to privacy, consent for recording (audio and video), surveillance, and data protection.
+
+\n\n   3.Explicit Consent is Crucial: Before initiating any video recording, especially in situations where other people may be recorded without their direct knowledge due to background operation, it is your absolute and non-transferable responsibility to obtain explicit and informed consent from all individuals involved or who may be captured in the recording. Recording individuals without their consent can be a serious privacy violation and is illegal in many jurisdictions.
+
+\n\n   4.Ethical and Permitted Use: You agree not to use the background recording functionality for:
+\n     •Any illegal, unlawful, fraudulent, or malicious purpose.
+\n     •To surveil, spy on, harass, intimidate, or coerce any individual.
+\n     •To invade anyone\'s privacy or record private conversations or activities without the consent of all parties.
+\n     •To surreptitiously or unlawfully collect personal or sensitive information.
+\n     •Any other activity that could be considered unethical, invasive, or harmful.
+
+\n\n   5.Developer\'s Full Disclaimer of Liability: The developer of the Application provides the recording functionality "AS IS". The developer is not liable, under any circumstances, for any use you make of the video recording functionality, for any third-party claims related to your recordings, or for any legal or privacy violations committed by you while using the Application. Any legal, social, or personal consequences resulting from the use of the recording functionality are your sole responsibility.
+
+\n\n   6.Awareness of Implications: You acknowledge that the ability to record video in the background is a powerful tool that must be used with extreme caution, discretion, and respect for the privacy of others. The developer urges you to carefully consider the ethical and legal implications before each use.
+
+\n\nBy activating or using the background video recording functionality of SVR - Secret Video, you declare that you have read, understood, and agree to be unconditionally bound by this Responsibility Disclaimer. If you do not agree with these terms, do not use this functionality.</string>
+
+    <string name="button_agree_and_continue">Agree</string>
     <string name="privacyPolicy">Privacy Policy</string>
+    <string name="button_continue">Continue</string>
 </resources>

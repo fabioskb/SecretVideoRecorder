@@ -97,5 +97,30 @@
     <string name="start_recording_on_boot_on">Iniciar gravação ao abrir o aplicativo ativado.</string>
     <string name="start_recording_on_boot_off">Iniciar gravação ao abrir o aplicativo desativado.</string>
     <string name="open">Abrir</string>
+    <string name="user_responsibility_disclaimer_title">Importante: Responsabilidade do Usuário</string>
+    <string name="user_responsibility_disclaimer_message">LEIA ATENTAMENTE. AO USAR A FUNCIONALIDADE DE GRAVAÇÃO DE VÍDEO DESTE APLICATIVO, VOCÊ CONCORDA INTEGRALMENTE COM OS SEGUINTES TERMOS:
+
+\n\nO aplicativo SVR - Vídeo Secreto (doravante "o Aplicativo") permite a gravação de vídeos, inclusive quando o Aplicativo está operando em segundo plano ou com a tela do dispositivo desligada.
+
+\n\n   1.Sua Responsabilidade Exclusiva: Você, como usuário, é o único e exclusivo responsável por todo e qualquer uso da funcionalidade de gravação de vídeo do Aplicativo, especialmente ao gravar em segundo plano. Isso inclui, sem limitações, decidir quando, onde, como e o quê gravar.
+
+\n\n   2.Conformidade Legal Obrigatória: Você se compromete a utilizar a funcionalidade de gravação de vídeo em estrita conformidade com todas as leis, regulamentos e estatutos locais, estaduais, nacionais e internacionais aplicáveis. Isso inclui, fundamentalmente, todas as leis relativas à privacidade, consentimento para gravação (de áudio e vídeo), vigilância e proteção de dados.
+
+\n\n   3.Consentimento Explícito é Crucial: Antes de iniciar qualquer gravação de vídeo, especialmente em situações onde outras pessoas possam ser gravadas sem o seu conhecimento direto devido à operação em segundo plano, é sua responsabilidade absoluta e intransferível obter o consentimento explícito e informado de todos os indivíduos envolvidos ou que possam ser capturados na gravação. Gravar indivíduos sem o consentimento deles pode ser uma violação grave da privacidade e é ilegal em muitas jurisdições.
+
+\n\n   4.Uso Ético e Permitido: Você concorda em não utilizar a funcionalidade de gravação em segundo plano para:
+\n     •Qualquer finalidade ilegal, ilícita, fraudulenta ou maliciosa.
+\n     •Vigiar, espionar, assediar, intimidar ou coagir qualquer indivíduo.
+\n     •Invadir a privacidade de qualquer pessoa ou gravar conversas ou atividades privadas sem o consentimento de todas as partes.
+\n     •Coletar informações pessoais ou sensíveis de forma sub-reptícia ou não autorizada.
+\n     •Qualquer outra atividade que possa ser considerada antiética, invasiva ou prejudicial.
+
+\n\n   5.Isenção Total de Responsabilidade do Desenvolvedor: O desenvolvedor do Aplicativo fornece a funcionalidade de gravação "COMO ESTÁ". O desenvolvedor não se responsabiliza, sob nenhuma circunstância, por qualquer uso que você faça da funcionalidade de gravação de vídeo, por quaisquer reivindicações de terceiros relacionadas às suas gravações, ou por qualquer violação legal ou de privacidade cometida por você ao usar o Aplicativo. Qualquer consequência legal, social ou pessoal resultante do uso da funcionalidade de gravação é de sua inteira responsabilidade.
+
+\n\n   6.Consciência das Implicações: Você reconhece que a capacidade de gravar vídeo em segundo plano é uma ferramenta poderosa que deve ser usada com extrema cautela, discrição e respeito pela privacidade alheia. O desenvolvedor o exorta a considerar cuidadosamente as implicações éticas e legais antes de cada uso.
+
+\n\nAo ativar ou utilizar a funcionalidade de gravação de vídeo em segundo plano do SVR - Vídeo Secreto, você declara que leu, compreendeu e concorda em estar incondicionalmente vinculado por esta Declaração de Responsabilidade. Se você não concorda com estes termos, não utilize esta funcionalidade.</string>
+    <string name="button_agree_and_continue">Concordo</string>
     <string name="privacyPolicy">Política de Privacidade</string>
+    <string name="button_continue">Continuar</string>
 </resources>

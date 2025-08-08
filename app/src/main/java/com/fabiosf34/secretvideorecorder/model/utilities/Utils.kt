@@ -58,6 +58,8 @@ class Utils {
         const val BANNER_AD_UNIT_ID = BuildConfig.ADMOB_BANNER_ID
         const val PRIVACY_POLICY_URL =
             "https://sites.google.com/view/fabiosf34-secretvideorecorder/início/privacy-policy"
+        const val DISCLAIMER_ACCEPTED_CHECKBOX = "disclaimer_accepted_checkbox"
+    const val DISCLAIMER_ACCEPTED = "disclaimer_accepted"
 
         // Objeto companion ou em um singleton acessível globalmente
         object AppLifecycleManager {

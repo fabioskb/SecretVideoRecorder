@@ -54,6 +54,26 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
     private val _startRecordingOnBoot = MutableLiveData<Boolean>()
     val startRecordingOnBoot: LiveData<Boolean> = _startRecordingOnBoot
 
+    private val _isDisclaimerAcceptedCheckedBox = MutableLiveData<Boolean>()
+    val isDisclaimerAcceptedCheckedBox: LiveData<Boolean> = _isDisclaimerAcceptedCheckedBox
+
+    private val _isDisclaimerAccepted = MutableLiveData<Boolean>()
+    val isDisclaimerAccepted: LiveData<Boolean> = _isDisclaimerAccepted
+
+    fun saveDisclaimerAcceptedCheckBox(isChecked: Boolean) {
+        preferences.store(Utils.DISCLAIMER_ACCEPTED_CHECKBOX, isChecked)
+        _isDisclaimerAcceptedCheckedBox.value = isChecked
+    }
+
+    fun saveDisclaimerAccepted(isChecked: Boolean) {
+        preferences.store(Utils.DISCLAIMER_ACCEPTED, isChecked)
+        _isDisclaimerAccepted.value = getPrefers(Utils.DISCLAIMER_ACCEPTED, false)
+    }
+
+    fun isDisclaimerAccepted(): Boolean {
+        _isDisclaimerAccepted.value = getPrefers(Utils.DISCLAIMER_ACCEPTED, false)
+        return _isDisclaimerAccepted.value!!
+    }
     fun saveStopRecordingSwitchState(isChecked: Boolean) {
         preferences.store(Utils.STOP_RECORDING_SWITCH_SETTINGS, isChecked)
         _isStopRecordingSwitchChecked.value = isChecked

@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -74,6 +75,8 @@ class PermissionsCheckActivity : AppCompatActivity() {
             handlePermissionsResult(permissions)
         }
 
+    private var isDisclaimerAccepted: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -88,12 +91,16 @@ class PermissionsCheckActivity : AppCompatActivity() {
 
         permissionsCheckViewModel = ViewModelProvider(this)[SettingViewModel::class.java]
 
+        isDisclaimerAccepted = permissionsCheckViewModel.isDisclaimerAccepted()
+
         // TODO: Implementar na produção
 //        MobileAds.initialize(this) {}
 
         // Não faça a navegação no onCreate diretamente após a verificação inicial.
         // A lógica de permissão é assíncrona.
         // Apenas inicie o processo de verificação/solicitação.
+        listeners()
+        observer()
     }
 
     override fun onResume() {
@@ -106,6 +113,31 @@ class PermissionsCheckActivity : AppCompatActivity() {
         checkAndRequestPermissions()
     }
 
+    private fun listeners() {
+        binding.disclaimerAcceptedCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            permissionsCheckViewModel.saveDisclaimerAcceptedCheckBox(isChecked)
+        }
+
+        binding.disclaimerAcceptedButton.setOnClickListener {
+            permissionsCheckViewModel.saveDisclaimerAccepted(true)
+            checkAndRequestPermissions()
+        }
+    }
+
+    private fun observer() {
+        permissionsCheckViewModel.isDisclaimerAcceptedCheckedBox.observe(this) { isChecked ->
+            if (isChecked) {
+                binding.disclaimerAcceptedButton.visibility = View.VISIBLE
+                binding.disclaimerAcceptedCheckbox.text = ""
+            } else {
+                binding.disclaimerAcceptedButton.visibility = View.GONE
+                binding.disclaimerAcceptedCheckbox.text = getString(R.string.button_agree_and_continue)
+            }
+        }
+        permissionsCheckViewModel.isDisclaimerAccepted.observe(this) { isChecked ->
+            isDisclaimerAccepted = isChecked
+        }
+    }
     private fun allPermissionsGranted(): Boolean {
         for (permission in requiredPermissions) {
             if (ContextCompat.checkSelfPermission(
@@ -120,7 +152,7 @@ class PermissionsCheckActivity : AppCompatActivity() {
     }
 
     private fun checkAndRequestPermissions() {
-        if (allPermissionsGranted()) {
+        if (allPermissionsGranted() && isDisclaimerAccepted) {
             // Se todas as permissões já estão concedidas, navegue
 
             navigateToNextActivity()
@@ -149,8 +181,8 @@ class PermissionsCheckActivity : AppCompatActivity() {
 
     private fun handlePermissionsResult(grantedPermissions: Map<String, Boolean>) {
         if (grantedPermissions.all { it.value }) {
-            // Todas as permissões foram concedidas
-            navigateToNextActivity()
+            // Todas as permissões foram concedidas e o usuário aceitou o disclaimer
+            if (isDisclaimerAccepted) navigateToNextActivity()
         } else {
             // Pelo menos uma permissão foi negada
             // Verifique se alguma foi negada permanentemente
