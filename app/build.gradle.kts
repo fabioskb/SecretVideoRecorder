@@ -22,9 +22,9 @@ android {
         applicationId = "com.fabiosf34.secretvideorecorder"
         minSdk = 24
         targetSdk = 36
-        // 03/08/2025 18:29
-        versionCode = 15
-        versionName = "1.0.0-beta.13"
+        // 08/08/2025 19:53
+        versionCode = 16
+        versionName = "1.0.0-beta.14"
         ///////////
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
