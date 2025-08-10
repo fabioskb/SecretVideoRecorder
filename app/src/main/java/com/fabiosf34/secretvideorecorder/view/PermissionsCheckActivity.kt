@@ -101,6 +101,7 @@ class PermissionsCheckActivity : AppCompatActivity() {
         // Apenas inicie o processo de verificação/solicitação.
         listeners()
         observer()
+        permissionsCheckViewModel.getScreenResolutionDp(windowManager, resources)
     }
 
     override fun onResume() {

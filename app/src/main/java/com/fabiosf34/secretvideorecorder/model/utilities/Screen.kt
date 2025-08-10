@@ -32,4 +32,43 @@ class Screen() {
         }
         return listOf(deviceScreenWidthPx, deviceScreenHeightPx)
     }
+
+    fun getScreenResolutionDp(windowManager: WindowManager, resources: Resources) {
+
+        var deviceScreenWidthPx: Int
+        var deviceScreenHeightPx: Int
+
+        val deviceScreenDensity = resources.displayMetrics.density
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = windowManager.currentWindowMetrics
+            val insets = windowMetrics.windowInsets.getInsetsIgnoringVisibility(
+                WindowInsets.Type.systemBars()
+            )
+            deviceScreenWidthPx = windowMetrics.bounds.width() - insets.left - insets.right
+            deviceScreenHeightPx = windowMetrics.bounds.height() - insets.top - insets.bottom
+
+            Log.d(
+                "ScreenResolution",
+                "Largura da Janela em dp (API 30+): ${deviceScreenWidthPx / deviceScreenDensity} dp"
+            )
+            Log.d(
+                "ScreenResolution",
+                "Altura da Janela em dp (API 30+): ${deviceScreenHeightPx / deviceScreenDensity} dp"
+            )
+        } else {
+            // Fallback para APIs mais antigas (usar DisplayMetrics)
+            val displayMetrics = resources.displayMetrics
+            deviceScreenWidthPx = displayMetrics.widthPixels
+            deviceScreenHeightPx = displayMetrics.heightPixels
+            Log.d(
+                "ScreenResolution",
+                "Largura da Tela (Fallback) em dp: ${deviceScreenWidthPx / deviceScreenDensity} dp"
+            )
+            Log.d(
+                "ScreenResolution",
+                "Altura da Tela (Fallback) em dp: ${deviceScreenHeightPx / deviceScreenDensity} dp"
+            )
+        }
+    }
 }

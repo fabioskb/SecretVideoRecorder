@@ -2,7 +2,9 @@ package com.fabiosf34.secretvideorecorder.viewModel
 
 import android.app.Activity
 import android.app.Application
+import android.content.res.Resources
 import android.text.style.ClickableSpan
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.AndroidViewModel
@@ -12,6 +14,7 @@ import androidx.lifecycle.application
 import com.fabiosf34.secretvideorecorder.model.repository.Preferences
 import com.fabiosf34.secretvideorecorder.model.utilities.BiometricHelper
 import com.fabiosf34.secretvideorecorder.model.utilities.Links
+import com.fabiosf34.secretvideorecorder.model.utilities.Screen
 import com.fabiosf34.secretvideorecorder.model.utilities.StorageHelper
 import com.fabiosf34.secretvideorecorder.model.utilities.Utils
 
@@ -186,6 +189,10 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
 
     fun getPrefers(key: String, defaultValue: String): String? {
         return preferences.retrieve(key, defaultValue)
+    }
+
+    fun getScreenResolutionDp(windowManager: WindowManager, resources: Resources) {
+        Screen().getScreenResolutionDp(windowManager, resources)
     }
 
 //    fun savePrefers(key: String, value: String) {
