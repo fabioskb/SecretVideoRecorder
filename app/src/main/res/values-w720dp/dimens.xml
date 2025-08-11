@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="gallery_width">400dp</dimen>
+    <dimen name="preview_width">500dp</dimen>
 </resources>

@@ -19,7 +19,6 @@ import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -110,9 +109,11 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
         ) {
             defaultCamera = CameraSelector.DEFAULT_BACK_CAMERA
             setDefaultCamSettings()
+            Toast.makeText(this, getString(R.string.default_back_cam), Toast.LENGTH_SHORT).show()
         } else {
             defaultCamera = CameraSelector.DEFAULT_FRONT_CAMERA
             setDefaultCamSettings()
+            Toast.makeText(this, getString(R.string.default_front_cam), Toast.LENGTH_SHORT).show()
         }
 
         isFirstRumCamActivity = camViewModel.retrievePreference(Utils.IS_FIRST_RUN_CAM, true)
@@ -269,21 +270,21 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
         deviceScreenWidthPx = deviceResolution[0]
         deviceScreenHeightPx = deviceResolution[1]
 
-        val newHeight: Int
-        val multi: Double = if (deviceScreenHeightPx <= 1280) {
-            0.35
-        } else 0.5
-
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            newHeight = (deviceScreenWidthPx * 0.2).toInt()
-            binding.viewFinder.setPadding(8)
-        } else {
-            newHeight = (deviceScreenHeightPx * multi).toInt()
-            binding.viewFinder.setPadding(16)
-        }
-
-        binding.viewFinder.layoutParams.height = newHeight
-        binding.viewFinder.requestLayout()
+//        val newHeight: Int
+//        val multi: Double = if (deviceScreenHeightPx <= 1280) {
+//            0.35
+//        } else 0.5
+//
+//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            newHeight = (deviceScreenWidthPx * 0.2).toInt()
+//            binding.viewFinder.setPadding(8)
+//        } else {
+//            newHeight = (deviceScreenHeightPx * multi).toInt()
+//            binding.viewFinder.setPadding(16)
+//        }
+//
+//        binding.viewFinder.layoutParams.height = newHeight
+//        binding.viewFinder.requestLayout()
 
         if (!isRecording) {
             setCams()
@@ -339,8 +340,7 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
 
         camViewModel.hasBothCamera.observe(this) {
             if (it && !isRecording) {
-                binding.backCamButton.visibility = View.VISIBLE
-                binding.frontCamButton.visibility = View.VISIBLE
+                binding.camSwitch.visibility = View.VISIBLE
                 setDefaultCamSettings()
             }
         }
@@ -392,11 +392,14 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
             camViewModel.checkBothCameraAvailable()
         }
 
-        binding.backCamButton.setOnClickListener {
-            setDefaultCamSettings(true)
-        }
-
-        binding.frontCamButton.setOnClickListener {
+        binding.camSwitch.setOnClickListener {
+            if (defaultCamera == CameraSelector.DEFAULT_BACK_CAMERA) {
+                Toast.makeText(this, getString(R.string.default_front_cam), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(this, getString(R.string.default_back_cam), Toast.LENGTH_SHORT)
+                    .show()
+            }
             setDefaultCamSettings(true)
         }
 
@@ -492,40 +495,32 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
 
     }
 
-    private fun setDefaultCamSettings(inOnClick: Boolean = false) {
+    private fun setDefaultCamSettings(inOnCamSwitch: Boolean = false) {
 
-        if (if (inOnClick) defaultCamera != CameraSelector.DEFAULT_BACK_CAMERA
-            else defaultCamera == CameraSelector.DEFAULT_BACK_CAMERA
-        ) {
-            defaultCamera = CameraSelector.DEFAULT_BACK_CAMERA
-            if (isPreviewRunning) {
-                camViewModel.stopCamPreview()
-                camViewModel.startCamPreview(binding.viewFinder, defaultCamera, this)
-            }
-            camViewModel.storePreference(Utils.DEFAULT_CAMERA, getString(R.string.back_cam))
-            binding.backCamButton.setBackgroundColor(getColor(R.color.buttonsOn))
-            binding.frontCamButton.setBackgroundColor(getColor(R.color.buttonsOff))
-            binding.backCamButton.isClickable = false
-            binding.frontCamButton.isClickable = true
-        } else if (if (inOnClick) defaultCamera != CameraSelector.DEFAULT_FRONT_CAMERA
-            else defaultCamera == CameraSelector.DEFAULT_FRONT_CAMERA
-        ) {
-            defaultCamera = CameraSelector.DEFAULT_FRONT_CAMERA
-            if (isPreviewRunning) {
-                camViewModel.stopCamPreview()
-                camViewModel.startCamPreview(binding.viewFinder, defaultCamera, this)
-            }
-            camViewModel.storePreference(Utils.DEFAULT_CAMERA, getString(R.string.front_cam))
-            binding.frontCamButton.setBackgroundColor(getColor(R.color.buttonsOn))
-            binding.backCamButton.setBackgroundColor(getColor(R.color.buttonsOff))
-            binding.frontCamButton.isClickable = false
-            binding.backCamButton.isClickable = true
+        if (defaultCamera == CameraSelector.DEFAULT_BACK_CAMERA) {
+            defaultCamera = if (inOnCamSwitch) CameraSelector.DEFAULT_FRONT_CAMERA
+            else CameraSelector.DEFAULT_BACK_CAMERA
+            camViewModel.storePreference(
+                Utils.DEFAULT_CAMERA,
+                getString(if (inOnCamSwitch) R.string.front_cam else R.string.back_cam)
+            )
+        } else if (defaultCamera == CameraSelector.DEFAULT_FRONT_CAMERA) {
+            defaultCamera = if (inOnCamSwitch) CameraSelector.DEFAULT_BACK_CAMERA
+            else CameraSelector.DEFAULT_FRONT_CAMERA
+            camViewModel.storePreference(
+                Utils.DEFAULT_CAMERA,
+                if (inOnCamSwitch) getString(R.string.back_cam) else getString(R.string.front_cam)
+            )
         }
+        if (isPreviewRunning) {
+            camViewModel.stopCamPreview()
+            camViewModel.startCamPreview(binding.viewFinder, defaultCamera, this)
+        }
+
     }
 
     private fun hiddenAllButtons() {
-        binding.backCamButton.visibility = View.GONE
-        binding.frontCamButton.visibility = View.GONE
+        binding.camSwitch.visibility = View.GONE
         binding.previewCamButton.visibility = View.GONE
     }
 

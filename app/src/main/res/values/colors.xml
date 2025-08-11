@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="buttonsOff">#006B78</color>
+    <color name="buttonsOff">#0A6966</color>
     <color name="buttonsOn">#00BCD4</color>
     <!-- Outras cores -->
     <color name="switch_thumb_color_on">#4CAF50</color> <!-- Verde para ligado -->

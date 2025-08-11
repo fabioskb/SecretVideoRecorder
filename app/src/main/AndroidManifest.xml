@@ -96,6 +96,7 @@
 
         <activity
             android:name=".view.PermissionsCheckActivity"
+            android:configChanges="screenSize|screenLayout|orientation"
             android:exported="false">
 <!--                            <intent-filter>-->
 <!--                                <action android:name="android.intent.action.MAIN" />-->
@@ -141,7 +142,7 @@
             android:hardwareAccelerated="true"
             android:name=".view.CamActivity"
             android:theme="@style/Theme.Material3.DayNight.NoActionBar"
-            android:configChanges="screenSize|screenLayout|orientation"
+            android:configChanges="orientation"
             android:exported="false" />
     </application>
 

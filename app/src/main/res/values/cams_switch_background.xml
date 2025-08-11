@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="gallery_width">400dp</dimen>
+    <color name="cams_switch_background">#0A6966</color>
 </resources>
