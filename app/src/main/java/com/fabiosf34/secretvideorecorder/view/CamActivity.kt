@@ -56,8 +56,7 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
 //    TODO: Implementar na produção
 //    private lateinit var adViewBanner: AdView
 //    private var mInterstitialAd: InterstitialAd? = null
-    private var deviceScreenWidthPx = 0
-    private var deviceScreenHeightPx = 0
+
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
@@ -169,7 +168,7 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
         super.onResume()
         isRecording = camViewModel.getRecordingStatus()
         observer()
-        setLayout(resources.configuration.orientation)
+        setLayout()
 
 //
         if (camViewModel.retrievePreference(
@@ -249,7 +248,7 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        setLayout(newConfig.orientation)
+        setLayout()
         if ((newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE
                     || newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
             && camViewModel.retrievePreference(Utils.STOP_RECORDING_SWITCH_SETTINGS, false)
@@ -265,27 +264,7 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
 //        binding.adViewBanner.addView(this.adViewBanner)
 //    }
 
-    private fun setLayout(orientation: Int) {
-        val deviceResolution = camViewModel.getScreenResolution(windowManager, resources)
-        deviceScreenWidthPx = deviceResolution[0]
-        deviceScreenHeightPx = deviceResolution[1]
-
-//        val newHeight: Int
-//        val multi: Double = if (deviceScreenHeightPx <= 1280) {
-//            0.35
-//        } else 0.5
-//
-//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            newHeight = (deviceScreenWidthPx * 0.2).toInt()
-//            binding.viewFinder.setPadding(8)
-//        } else {
-//            newHeight = (deviceScreenHeightPx * multi).toInt()
-//            binding.viewFinder.setPadding(16)
-//        }
-//
-//        binding.viewFinder.layoutParams.height = newHeight
-//        binding.viewFinder.requestLayout()
-
+    private fun setLayout() {
         if (!isRecording) {
             setCams()
 
