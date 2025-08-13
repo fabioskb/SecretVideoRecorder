@@ -19,6 +19,7 @@ import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -31,13 +32,12 @@ import com.fabiosf34.secretvideorecorder.model.services.BackgroundVideoService
 import com.fabiosf34.secretvideorecorder.model.utilities.Utils
 import com.fabiosf34.secretvideorecorder.model.utilities.Utils.Companion.AppLifecycleManager
 import com.fabiosf34.secretvideorecorder.viewModel.CamViewModel
-// TODO: Implementar na produção
-//import com.google.android.gms.ads.AdError
-//import com.google.android.gms.ads.AdView
-//import com.google.android.gms.ads.FullScreenContentCallback
-//import com.google.android.gms.ads.LoadAdError
-//import com.google.android.gms.ads.interstitial.InterstitialAd
-//import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
 class CamActivity : ProtectedBaseActivity(), RecordingListener {
     private lateinit var binding: ActivityCamBinding
@@ -53,9 +53,8 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
     private var isFirstRumCamActivity = false
     private var isRecording = false
 
-//    TODO: Implementar na produção
-//    private lateinit var adViewBanner: AdView
-//    private var mInterstitialAd: InterstitialAd? = null
+    private lateinit var adViewBanner: AdView
+    private var mInterstitialAd: InterstitialAd? = null
 
 
     private val serviceConnection = object : ServiceConnection {
@@ -155,8 +154,7 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
 
 
         // Admob
-        // TODO: Inicialize o AdMob Interstitial
-//        camViewModel.adMobInterstitialLoader(loadInterstitialCallBack())
+        camViewModel.adMobInterstitialLoader(loadInterstitialCallBack())
         ///////
 
         camViewModel.getRecordingOnBootStatus()
@@ -185,12 +183,11 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
         )
 
         AppLifecycleManager.isLoginActivityLaunched = false
-        // TODO: Inicialize o AdMob Banner
-//        showAdBanner()
+        showAdBanner()
     }
 
     override fun onPause() {
-//        adViewBanner.pause()
+        adViewBanner.pause()
         super.onPause()
     }
 
@@ -200,7 +197,7 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
     }
 
     override fun onDestroy() {
-//        adViewBanner.destroy()
+        adViewBanner.destroy()
         super.onDestroy()
         LocalBroadcastManager.getInstance(this).unregisterReceiver(finishActivityReceiver)
         Log.d("CamActivity", "onDestroy")
@@ -226,8 +223,7 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
             )
         }
         Toast.makeText(this, R.string.video_saved, Toast.LENGTH_SHORT).show()
-        //TODO: Mostrar AdMob Interstitial
-//        showAdMobInterstitial()
+        showAdMobInterstitial()
     }
 
     override fun onRecording() {
@@ -257,12 +253,11 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
         }
     }
 
-//    TODO: Implementar na produção
-//    private fun showAdBanner() {
-//        binding.adViewBanner.removeAllViews()
-//        this.adViewBanner = camViewModel.adMobBanner()
-//        binding.adViewBanner.addView(this.adViewBanner)
-//    }
+    private fun showAdBanner() {
+        binding.adViewBanner.removeAllViews()
+        this.adViewBanner = camViewModel.adMobBanner()
+        binding.adViewBanner.addView(this.adViewBanner)
+    }
 
     private fun setLayout() {
         if (!isRecording) {
@@ -281,6 +276,15 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
             camViewModel.stopCamPreview()
             camViewModel.startCamPreview(binding.viewFinder, defaultCamera, this)
         }
+
+        if (!isPreviewRunning or isRecording) camViewModel.centerLinearLayoutFromConstraintLayout(
+            binding.linearLayoutCamSwitch,
+            true
+        ) else camViewModel.centerLinearLayoutFromConstraintLayout(
+            binding.linearLayoutCamSwitch,
+            false
+        )
+
 
     }
 
@@ -308,13 +312,15 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
                 binding.previewCamButton.text = getString(R.string.hide_preview)
             } else {
                 binding.viewFinder.visibility = View.GONE
-                binding.previewCamButton.setBackgroundColor(getColor(R.color.buttonsOff))
+                binding.previewCamButton.setBackgroundColor(getColor(R.color.radio_group_background_color))
                 binding.previewCamButton.text = getString(R.string.preview_cam)
             }
         }
 
         camViewModel.isRecording.observe(this) {
             isRecording = it
+            if (it) binding.linearLayoutCamSwitch.setPadding(camViewModel.dpToPx(0))
+            else binding.linearLayoutCamSwitch.setPadding(camViewModel.dpToPx(16))
         }
 
         camViewModel.hasBothCamera.observe(this) {
@@ -385,11 +391,10 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
         binding.previewCamButton.setOnClickListener {
             if (!isPreviewRunning) {
                 camViewModel.startCamPreview(binding.viewFinder, defaultCamera, this)
-                binding.previewCamButton.setBackgroundColor(getColor(R.color.black))
             } else {
                 camViewModel.stopCamPreview()
-                binding.previewCamButton.setBackgroundColor(getColor(R.color.buttonsOff))
             }
+            setLayout()
         }
 
         binding.appBarMain.toolbar.setNavigationOnClickListener {
@@ -403,69 +408,70 @@ class CamActivity : ProtectedBaseActivity(), RecordingListener {
             loadFragment(GalleryFragment())
         }
     }
-// TODO: Implementar na produção
-//    private fun loadInterstitialCallBack(): InterstitialAdLoadCallback {
-//        return object : InterstitialAdLoadCallback() {
-//            override fun onAdFailedToLoad(adError: LoadAdError) {
-//                Log.d("CamActivity", "Ad failed to load: $adError")
-//                mInterstitialAd = null
-//            }
-//            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-//                Log.d("CamActivity", "Ad was loaded.")
-//                mInterstitialAd = interstitialAd
-//            }
-//        }
-//    }
-//
-//
-//    private fun loadInterstitialFullScreenContentCallback(): FullScreenContentCallback {
-//        return object : FullScreenContentCallback() {
-//            override fun onAdDismissedFullScreenContent() {
-//                super.onAdDismissedFullScreenContent()
-//                Log.d("CamActivity", "Ad was dismissed.")
-//                mInterstitialAd = null
-//                camViewModel.adMobInterstitialLoader(loadInterstitialCallBack())
-//            }
-//
-//            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-//                super.onAdFailedToShowFullScreenContent(p0)
-//                Log.d("CamActivity", "Ad failed to show.")
-//                mInterstitialAd = null
-//                camViewModel.adMobInterstitialLoader(loadInterstitialCallBack())
-//            }
-//
-//            override fun onAdShowedFullScreenContent() {
-//                super.onAdShowedFullScreenContent()
-//                Log.d("CamActivity", "Ad showed fullscreen content.")
-//            }
-//
-//            override fun onAdImpression() {
-//                super.onAdImpression()
-//                Log.d("CamActivity", "Ad impression.")
-//            }
-//
-//            override fun onAdClicked() {
-//                super.onAdClicked()
-//                Log.d("CamActivity", "Ad clicked.")
-//            }
-//        }.also { mInterstitialAd?.fullScreenContentCallback = it }
-//    }
-//
-//    private fun showAdMobInterstitial() {
-//        Log.d(
-//            "CamActivity",
-//            "My interstitial is ${if (mInterstitialAd != null) "not " else ""}null."
-//        )
-//        if (mInterstitialAd != null) {
-//            loadInterstitialFullScreenContentCallback()
-//            mInterstitialAd?.show(this)
-//        } else {
-//            Log.d("CamActivity", "The interstitial ad wasn't ready yet.")
-//            camViewModel.adMobInterstitialLoader(loadInterstitialCallBack())
-//            loadInterstitialFullScreenContentCallback()
-//            mInterstitialAd?.show(this)
-//        }
-//    }
+
+    private fun loadInterstitialCallBack(): InterstitialAdLoadCallback {
+        return object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d("CamActivity", "Ad failed to load: $adError")
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.d("CamActivity", "Ad was loaded.")
+                mInterstitialAd = interstitialAd
+            }
+        }
+    }
+
+
+    private fun loadInterstitialFullScreenContentCallback(): FullScreenContentCallback {
+        return object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                super.onAdDismissedFullScreenContent()
+                Log.d("CamActivity", "Ad was dismissed.")
+                mInterstitialAd = null
+                camViewModel.adMobInterstitialLoader(loadInterstitialCallBack())
+            }
+
+            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                super.onAdFailedToShowFullScreenContent(p0)
+                Log.d("CamActivity", "Ad failed to show.")
+                mInterstitialAd = null
+                camViewModel.adMobInterstitialLoader(loadInterstitialCallBack())
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                super.onAdShowedFullScreenContent()
+                Log.d("CamActivity", "Ad showed fullscreen content.")
+            }
+
+            override fun onAdImpression() {
+                super.onAdImpression()
+                Log.d("CamActivity", "Ad impression.")
+            }
+
+            override fun onAdClicked() {
+                super.onAdClicked()
+                Log.d("CamActivity", "Ad clicked.")
+            }
+        }.also { mInterstitialAd?.fullScreenContentCallback = it }
+    }
+
+    private fun showAdMobInterstitial() {
+        Log.d(
+            "CamActivity",
+            "My interstitial is ${if (mInterstitialAd != null) "not " else ""}null."
+        )
+        if (mInterstitialAd != null) {
+            loadInterstitialFullScreenContentCallback()
+            mInterstitialAd?.show(this)
+        } else {
+            Log.d("CamActivity", "The interstitial ad wasn't ready yet.")
+            camViewModel.adMobInterstitialLoader(loadInterstitialCallBack())
+            loadInterstitialFullScreenContentCallback()
+            mInterstitialAd?.show(this)
+        }
+    }
 
     private fun setCams() {
         camViewModel.hasBackCamera()

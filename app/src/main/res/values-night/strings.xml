@@ -126,6 +126,6 @@
     <string name="button_agree_and_continue">Agree</string>
     <string name="privacyPolicy">Privacy Policy</string>
     <string name="button_continue">Continue</string>
-    <string name="default_back_cam">Default back cam</string>
-    <string name="default_front_cam">Default front cam</string>
+    <string name="default_back_cam">Back cam selected</string>
+    <string name="default_front_cam">Front cam selected</string>
 </resources>

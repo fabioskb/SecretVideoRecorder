@@ -12,4 +12,5 @@
     <color name="background_gallery">#ffffff</color>
     <color name="background_gallery_dark">#121212</color>
     <color name="radio_group_background_color">#D0AFAFAF</color>
+    <color name="transparent">#00000000</color>
 </resources>

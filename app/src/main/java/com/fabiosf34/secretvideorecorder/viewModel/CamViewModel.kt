@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Resources
 import android.net.Uri
+import android.view.View
 import android.view.WindowManager
 import androidx.camera.core.CameraSelector
 import androidx.camera.view.PreviewView
@@ -21,6 +22,8 @@ import com.fabiosf34.secretvideorecorder.model.utilities.Ads
 import com.fabiosf34.secretvideorecorder.model.utilities.Notifications
 import com.fabiosf34.secretvideorecorder.model.utilities.Screen
 import com.fabiosf34.secretvideorecorder.model.utilities.Utils
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 //import com.google.android.gms.ads.AdView
 //import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import kotlinx.coroutines.delay
@@ -29,8 +32,8 @@ import kotlinx.coroutines.launch
 class CamViewModel(application: Application) : AndroidViewModel(application),
      PreviewRunningListener {
 
-//         TODO: Fazer na produção (Ads)
     private val ads = Ads(application)
+    private val screen = Screen()
     private val preferences = Preferences(application)
     private val camcorder = Camcorder(application)
     private val galleryRepository = VideoRepository(application)
@@ -61,6 +64,7 @@ class CamViewModel(application: Application) : AndroidViewModel(application),
             this,
             useCamcorder
         )
+        _isPreview.value = true
     }
 
 //    fun requestBatteryOptimizationExemption(activity: Activity) {
@@ -111,9 +115,20 @@ class CamViewModel(application: Application) : AndroidViewModel(application),
     }
 
     fun getScreenResolution(windowManager: WindowManager, resources: Resources): List<Int> {
-        return Screen().getScreenResolution(windowManager, resources)
+        return screen.getScreenResolution(windowManager, resources)
     }
 
+    fun setMarginsForView(view: View, left: Int, top: Int, right: Int, bottom: Int) {
+        screen.setMarginsForView(view, left, top, right, bottom)
+    }
+
+    fun centerLinearLayoutFromConstraintLayout(view: View, center: Boolean) {
+        screen.centerLinearLayoutFromConstraintLayout(view, center)
+    }
+
+    fun dpToPx(dp: Int): Int {
+        return screen.dpToPx(dp)
+    }
     fun restartApp(context: Context, lifecycleScope: LifecycleCoroutineScope) {
         // Exemplo com WorkManager para um atraso de 30 segundos
 //        val workRequest = OneTimeWorkRequestBuilder<MyDelayedWorker>()
@@ -157,12 +172,11 @@ class CamViewModel(application: Application) : AndroidViewModel(application),
         preferences.store(key, value)
     }
 
-//    TODO: Fazer na produção (Ads)
-//    fun adMobBanner(): AdView {
-//        return ads.adMobBanner()
-//    }
-//
-//    fun adMobInterstitialLoader(loadCallback: InterstitialAdLoadCallback) {
-//        ads.adMobInterstitialLoader(loadCallback)
-//    }
+    fun adMobBanner(): AdView {
+        return ads.adMobBanner()
+    }
+
+    fun adMobInterstitialLoader(loadCallback: InterstitialAdLoadCallback) {
+        ads.adMobInterstitialLoader(loadCallback)
+    }
 }

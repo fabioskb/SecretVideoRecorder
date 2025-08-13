@@ -106,10 +106,10 @@ dependencies {
 
 
     // Google ADS
-//    implementation(libs.play.services.ads) {
-//        exclude(group = "com.google.guava", module = "listenablefuture")
-//        exclude(group = "com.google.guava", module = "guava") // Tente excluir o Guava também
-//    }
+    implementation(libs.play.services.ads) {
+        exclude(group = "com.google.guava", module = "listenablefuture")
+        exclude(group = "com.google.guava", module = "guava") // Tente excluir o Guava também
+    }
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

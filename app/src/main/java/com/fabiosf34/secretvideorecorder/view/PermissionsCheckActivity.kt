@@ -23,8 +23,7 @@ import com.fabiosf34.secretvideorecorder.R
 import com.fabiosf34.secretvideorecorder.databinding.ActivityPermissionsCheckBinding
 import com.fabiosf34.secretvideorecorder.model.utilities.Utils
 import com.fabiosf34.secretvideorecorder.viewModel.SettingViewModel
-// TODO: Implementar na produção
-//import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.MobileAds
 
 // Remova a dependência do CamViewModel aqui se ele é apenas para checar permissões,
 // a Activity pode fazer isso diretamente. Se o ViewModel tiver mais lógica de permissão, mantenha.
@@ -93,8 +92,7 @@ class PermissionsCheckActivity : AppCompatActivity() {
 
         isDisclaimerAccepted = permissionsCheckViewModel.isDisclaimerAccepted()
 
-        // TODO: Implementar na produção
-//        MobileAds.initialize(this) {}
+        MobileAds.initialize(this) {}
 
         // Não faça a navegação no onCreate diretamente após a verificação inicial.
         // A lógica de permissão é assíncrona.
